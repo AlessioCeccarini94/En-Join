@@ -10,6 +10,7 @@
     </div>
     <div class="col">
       <button
+        (click)="openModal()"
         class="hero-header w-100 d-flex align-items-center justify-content-center p-3 rounded border-0"
       >
         <i class="hero-icons bi bi-plus-circle fs-1"></i>
@@ -58,3 +59,52 @@
     </div>
   </div>
 </div>
+
+<!-- MODAL -->
+
+<!-- Modal -->
+@if (isModalOpen) {
+  <div class="modal d-block">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Aggiungi Evento</h5>
+          <button type="button" class="btn-close" (click)="closeModal()"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Categoria</label>
+            <select class="form-select">
+              <option>Seleziona categoria...</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Numero massimo di persone</label>
+            <input type="number" class="form-control" placeholder="Es. 10" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Luogo</label>
+            <input type="text" class="form-control" placeholder="Es. Roma, Via..." />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Descrizione</label>
+            <textarea class="form-control" rows="3" placeholder="Descrivi l'evento..."></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Data</label>
+            <input type="date" class="form-control" />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" (click)="closeModal()">Annulla</button>
+          <button class="btn btn-primary">Salva Evento</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sfondo scuro dietro il modal -->
+  <div class="modal-backdrop fade show" (click)="closeModal()"></div>
+}

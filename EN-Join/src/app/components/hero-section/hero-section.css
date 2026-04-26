@@ -146,3 +146,8 @@
   border-color: #ff6b6b;
   color: #f8f9fa;
 }
+
+.modal-content {
+  background-color: #272727;
+  color: #ff6b6b;
+}
