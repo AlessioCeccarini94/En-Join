@@ -1,12 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { EventService } from "../../services/event";
-
-interface City {
-  id: number;
-  name: string;
-}
+import { EventService } from '../../services/event';
+import { CategoryService } from '../../services/category';
 
 @Component({
   selector: 'app-hero-section',
@@ -15,30 +11,34 @@ interface City {
   styleUrl: './hero-section.css',
 })
 export class HeroSection implements OnInit {
+  private http = inject(HttpClient);
+  private eventService = inject(EventService);
+  private categoryService = inject(CategoryService);
+
   isModalOpen = false;
-  cities: City[] = [];
+  cities: any[] = [];
+  category: any[] = [];
 
   nuovoEvento = {
     category: '',
     numberOfPeople: 0,
     location: '',
     description: '',
-    date: ''
+    date: '',
   };
 
-  constructor(
-    private eventService: EventService,
-    private http: HttpClient
-  ) {}
-
   ngOnInit() {
-    this.http.get<City[]>('http://localhost:8080/cities').subscribe({
+    this.http.get<any[]>('http://localhost:8080/cities').subscribe({
+      next: (data) => (this.cities = data),
+      error: (err) => console.error('Errore cities:', err),
+    });
+
+    this.http.get<any[]>('http://localhost:8080/categories').subscribe({
       next: (data) => {
-        this.cities = data;
+        console.log('Categorie:', data);
+        this.category = data;
       },
-      error: (error) => {
-        console.error('Errore durante il caricamento delle citta:', error);
-      }
+      error: (err) => console.error('Errore categories:', err),
     });
   }
 
@@ -48,24 +48,16 @@ export class HeroSection implements OnInit {
 
   closeModal() {
     this.isModalOpen = false;
-    this.nuovoEvento = {
-      category: '',
-      numberOfPeople: 0,
-      location: '',
-      description: '',
-      date: ''
-    };
+    this.nuovoEvento = { category: '', numberOfPeople: 0, location: '', description: '', date: '' };
   }
 
   salvaEvento() {
     this.eventService.createEvent(this.nuovoEvento).subscribe({
       next: (response) => {
-        console.log('Evento salvato con successo:', response);
+        console.log('Evento creato:', response);
         this.closeModal();
       },
-      error: (error) => {
-        console.error('Errore durante il salvataggio dell\'evento:', error);
-      }
+      error: (err) => console.error('Errore:', err),
     });
   }
 }

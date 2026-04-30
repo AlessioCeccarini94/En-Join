@@ -77,24 +77,37 @@
             <label class="form-label">Categoria</label>
             <select class="form-select" [(ngModel)]="nuovoEvento.category">
               <option>Seleziona categoria...</option>
+              @for (category of category; track category.id) {
+                <option [value]="category.name">{{ category.name }}</option>
+              }
             </select>
           </div>
           <div class="mb-3">
             <label class="form-label">Numero massimo di persone</label>
-            <input type="number" class="form-control" [(ngModel)]="nuovoEvento.numberOfPeople" placeholder="Es. 10" />
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="nuovoEvento.numberOfPeople"
+              placeholder="Es. 10"
+            />
           </div>
           <div class="mb-3">
             <label class="form-label">Luogo</label>
             <select class="form-select" [(ngModel)]="nuovoEvento.location">
               <option>Seleziona luogo...</option>
               @for (city of cities; track city.id) {
-                <option [value]="city.name">{{ city.name }}</option>
+                <option [value]="city.cityName">{{ city.cityName }}</option>
               }
             </select>
           </div>
           <div class="mb-3">
             <label class="form-label">Descrizione</label>
-            <textarea class="form-control" [(ngModel)]="nuovoEvento.description" rows="3" placeholder="Descrivi l'evento..."></textarea>
+            <textarea
+              class="form-control"
+              [(ngModel)]="nuovoEvento.description"
+              rows="3"
+              placeholder="Descrivi l'evento..."
+            ></textarea>
           </div>
           <div class="mb-3">
             <label class="form-label">Data</label>
