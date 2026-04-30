@@ -9,10 +9,24 @@
 
 .hero-section-row {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+}
+
+.hero-section-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-section-col button {
+  width: 100%;
+  background-color: #ff6b6b;
+  color: #f8f9fa;
 }
 
 .hero-header {
@@ -55,6 +69,18 @@
   background-color: #f8f9fa;
   color: #ff6b6b;
 }
+
+/* MODAL */
+.modal-header {
+  background-color: #ff6b6b;
+  color: #f8f9fa;
+  border: #ff6b6b;
+}
+
+.form-select {
+  cursor: pointer;
+}
+
 /* CARD */
 
 .card {

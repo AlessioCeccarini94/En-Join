@@ -2,19 +2,16 @@ import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 
-import { EventService } from './event';
+import { LoginService } from './login-service';
 
-describe('EventService', () => {
-  let service: EventService;
+describe('LoginService', () => {
+  let service: LoginService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        provideHttpClient(),
-        provideHttpClientTesting(),
-      ]
+      providers: [provideHttpClient(), provideHttpClientTesting()],
     });
-    service = TestBed.inject(EventService);
+    service = TestBed.inject(LoginService);
   });
 
   it('should be created', () => {

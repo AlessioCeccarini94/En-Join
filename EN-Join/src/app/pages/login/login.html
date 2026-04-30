@@ -1,1 +1,41 @@
-<p>login works!</p>
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Accedi</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field class="input-box w-100" appearance="outline">
+          <mat-label class="email">Email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="La tua email" />
+          @if (loginForm.get('email')?.hasError('required')) {
+            <mat-error>Email obbligatoria</mat-error>
+          }
+          @if (loginForm.get('email')?.hasError('email')) {
+            <mat-error>Email non valida</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            placeholder="La tua password"
+          />
+          @if (loginForm.get('password')?.hasError('required')) {
+            <mat-error>Password obbligatoria</mat-error>
+          }
+          @if (loginForm.get('password')?.hasError('minlength')) {
+            <mat-error>Minimo 6 caratteri</mat-error>
+          }
+        </mat-form-field>
+        <div class="d-flex justify-content-between"></div>
+        <a mat-button routerLink="/register"> Non sei registrato? clicca qui!</a>
+        <button mat-raised-button color="primary" type="submit" class="w-100">Accedi</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

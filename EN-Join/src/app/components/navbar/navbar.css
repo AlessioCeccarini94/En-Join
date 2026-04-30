@@ -49,3 +49,54 @@
   background-color: #f8f9fa;
   color: #ff6b6b;
 }
+
+.user-menu {
+  position: relative;
+}
+
+.avatar-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.avatar-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid #ff6b6b;
+  background-color: #272727;
+}
+
+.dropdown-menu-custom {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 150px;
+  background-color: #272727;
+  border: 1px solid #ff6b6b;
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 1000;
+}
+
+.dropdown-menu-custom a,
+.dropdown-menu-custom button {
+  background: transparent;
+  color: #f8f9fa;
+  border: none;
+  text-align: left;
+  text-decoration: none;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.dropdown-menu-custom a:hover,
+.dropdown-menu-custom button:hover {
+  background-color: #ff6b6b;
+  color: #f8f9fa;
+}

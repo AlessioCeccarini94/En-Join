@@ -1,0 +1,60 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+::ng-deep .login-card {
+  background-color: #272727 !important;
+  box-shadow: #ff6b6b 0px 0px 10px 0px !important;
+  color: #f8f9fa !important;
+  width: 400px;
+  padding: 2rem;
+}
+
+::ng-deep .login-card mat-card-title {
+  color: #f8f9fa !important;
+}
+
+::ng-deep .login-card .mat-mdc-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+::ng-deep .login-card .mat-mdc-text-field-wrapper {
+  background-color: #1a1a1a !important;
+}
+
+::ng-deep .login-card input {
+  color: #f8f9fa !important;
+}
+
+::ng-deep .login-card .mdc-floating-label {
+  color: #aaa !important;
+}
+
+::ng-deep .login-card .mdc-line-ripple::before {
+  border-color: #ff6b6b !important;
+}
+
+::ng-deep .login-card .mat-mdc-button-touch-target {
+  border-radius: 10%;
+}
+
+::ng-deep .mat-mdc-raised-button.mat-primary {
+  background-color: #ff6b6b !important;
+  width: 100%;
+  color: #f8f9fa !important;
+  border-radius: 1%;
+}
+
+::ng-deep .login-card .mdc-notched-outline__leading,
+::ng-deep .login-card .mdc-notched-outline__notch,
+::ng-deep .login-card .mdc-notched-outline__trailing {
+  border-color: #ff6b6b !important;
+}
+
+::ng-deep .login-card .mat-mdc-form-field {
+  --mdc-outlined-text-field-container-shape: 12px;
+}

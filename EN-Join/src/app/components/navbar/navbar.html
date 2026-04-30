@@ -1,6 +1,6 @@
 <nav class="navbar">
   <div class="container-fluid navbar-elements">
-    <a class="navbar-brand" href="/"><img src="EN-Join_logo.PNG" alt="" /></a>
+    <a class="navbar-brand" routerLink="/"><img src="EN-Join_logo.PNG" alt="" /></a>
     <form class="search-form" role="search">
       <input
         class="search-bar form-control me-2"
@@ -10,6 +10,25 @@
       />
       <button class="navbar-btn" type="submit">Search</button>
     </form>
-    <button class="navbar-btn" onclick="location.href = '/login'">Login</button>
+    @if (!isLoggedIn()) {
+      <button class="navbar-btn" routerLink="/login">Login</button>
+    } @else {
+      <div class="user-menu">
+        <button class="avatar-btn" type="button" (click)="toggleDropdown()">
+          <img
+            class="avatar-img"
+            src="https://api.dicebear.com/9.x/adventurer/svg?seed=EnJoinUser"
+            alt="User avatar"
+          />
+        </button>
+        @if (isDropdownOpen) {
+          <div class="dropdown-menu-custom">
+            <a routerLink="/" (click)="toggleDropdown()">Home</a>
+            <a routerLink="/categorie" (click)="toggleDropdown()">Categorie</a>
+            <button type="button" (click)="logout()">Logout</button>
+          </div>
+        }
+      </div>
+    }
   </div>
 </nav>

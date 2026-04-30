@@ -1,37 +1,22 @@
 <div class="container hero-section-container">
-  <div class="row row-cols-4 hero-section-row g-3">
-    <div class="col">
-      <button
-        class="hero-header w-100 d-flex align-items-center justify-content-center p-3 rounded border-0"
-      >
-        <i class="hero-icons bi bi-tags fs-1"></i>
+  <div class="row hero-section-row g-3 w-100 justify-content-center">
+    <div class="col hero-section-col">
+      <button (click)="openModal()" matFab extended>
+        <mat-icon>add_circle</mat-icon>
+        Aggiungi Evento
       </button>
-      <h5 class="text-center hero-card-title m-0 mt-2">Categorie</h5>
     </div>
-    <div class="col">
-      <button
-        (click)="openModal()"
-        class="hero-header w-100 d-flex align-items-center justify-content-center p-3 rounded border-0"
-      >
-        <i class="hero-icons bi bi-plus-circle fs-1"></i>
+    <div class="col hero-section-col">
+      <button matFab extended>
+        <mat-icon>folder_copy</mat-icon>
+        Categorie
       </button>
-      <h5 class="text-center hero-card-title m-0 mt-2">Aggiungi Evento</h5>
     </div>
-    <div class="col">
-      <button
-        class="hero-header w-100 d-flex align-items-center justify-content-center p-3 rounded border-0"
-      >
-        <i class="hero-icons bi bi-person-fill-lock fs-1"></i>
+    <div class="col hero-section-col">
+      <button matFab extended>
+        <mat-icon>date_range</mat-icon>
+        Prossimi Eventi
       </button>
-      <h5 class="text-center hero-card-title m-0 mt-2">Eventi Privati</h5>
-    </div>
-    <div class="col">
-      <button
-        class="hero-header w-100 d-flex align-items-center justify-content-center p-3 rounded border-0"
-      >
-        <i class="hero-icons bi bi-calendar3 fs-1"></i>
-      </button>
-      <h5 class="text-center hero-card-title m-0 mt-2">Calendario Eventi</h5>
     </div>
   </div>
 </div>
@@ -58,69 +43,86 @@
       </div>
     </div>
   </div>
-</div>
 
-<!-- MODAL -->
+  <!-- MODAL -->
 
-<!-- Modal -->
-@if (isModalOpen) {
-  <div class="modal d-block">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Aggiungi Evento</h5>
-          <button type="button" class="btn-close" (click)="closeModal()"></button>
-        </div>
+  <!-- Modal -->
+  @if (isModalOpen) {
+    <div class="modal d-block">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Aggiungi Evento</h5>
+            <button type="button" class="btn-close" (click)="closeModal()"></button>
+          </div>
 
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label">Categoria</label>
-            <select class="form-select" [(ngModel)]="nuovoEvento.category">
-              <option>Seleziona categoria...</option>
-              @for (category of category; track category.id) {
-                <option [value]="category.name">{{ category.name }}</option>
+          <form class="modal-body" [formGroup]="eventForm">
+            <div class="mb-3">
+              <label class="form-label">Categoria</label>
+              <select class="form-select" formControlName="category">
+                <option value="">Seleziona categoria...</option>
+                @for (item of category; track item.id) {
+                  <option [value]="item.name">{{ item.name }}</option>
+                }
+              </select>
+              @if (eventForm.get('category')?.invalid && eventForm.get('category')?.touched) {
+                <small class="text-danger">La categoria e obbligatoria.</small>
               }
-            </select>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Numero massimo di persone</label>
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="nuovoEvento.numberOfPeople"
-              placeholder="Es. 10"
-            />
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Luogo</label>
-            <select class="form-select" [(ngModel)]="nuovoEvento.location">
-              <option>Seleziona luogo...</option>
-              @for (city of cities; track city.id) {
-                <option [value]="city.cityName">{{ city.cityName }}</option>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Numero massimo di persone</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="numberOfPeople"
+                placeholder="Es. 10"
+              />
+              @if (eventForm.get('numberOfPeople')?.invalid && eventForm.get('numberOfPeople')?.touched) {
+                <small class="text-danger">Inserisci almeno 1 persona.</small>
               }
-            </select>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Descrizione</label>
-            <textarea
-              class="form-control"
-              [(ngModel)]="nuovoEvento.description"
-              rows="3"
-              placeholder="Descrivi l'evento..."
-            ></textarea>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Data</label>
-            <input type="date" class="form-control" [(ngModel)]="nuovoEvento.date" />
-          </div>
-        </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Luogo</label>
+              <select class="form-select" formControlName="location">
+                <option value="">Seleziona luogo...</option>
+                @for (city of cities; track city.id) {
+                  <option [value]="city.cityName">{{ city.cityName }}</option>
+                }
+              </select>
+              @if (eventForm.get('location')?.invalid && eventForm.get('location')?.touched) {
+                <small class="text-danger">Il luogo e obbligatorio.</small>
+              }
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Descrizione</label>
+              <textarea
+                class="form-control"
+                formControlName="description"
+                rows="3"
+                placeholder="Descrivi l'evento..."
+              ></textarea>
+              @if (eventForm.get('description')?.invalid && eventForm.get('description')?.touched) {
+                <small class="text-danger">La descrizione deve avere almeno 5 caratteri.</small>
+              }
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Data</label>
+              <input type="date" class="form-control" formControlName="date" />
+              @if (eventForm.get('date')?.invalid && eventForm.get('date')?.touched) {
+                <small class="text-danger">La data e obbligatoria.</small>
+              }
+            </div>
+          </form>
 
-        <div class="modal-footer">
-          <button class="btn btn-secondary" (click)="closeModal()">Annulla</button>
-          <button class="btn btn-primary" (click)="salvaEvento()">Salva Evento</button>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" (click)="closeModal()">Annulla</button>
+            <button class="btn btn-primary" [disabled]="eventForm.invalid" (click)="salvaEvento()">
+              Salva Evento
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="modal-backdrop fade show" (click)="closeModal()"></div>
-}
+    <div class="modal-backdrop fade show" (click)="closeModal()"></div>
+  }
+</div>
