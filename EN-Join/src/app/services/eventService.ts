@@ -10,10 +10,11 @@ export class EventService {
   private http = inject(HttpClient);
 
   createEvent(event: any): Observable<any> {
-    // const token = localStorage.getItem('token');
-    // const headers = new HttpHeaders({
-    //   Authorization: `Bearer ${token}`,
-    // });
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
     return this.http.post(this.apiUrl, event);
   }
 }

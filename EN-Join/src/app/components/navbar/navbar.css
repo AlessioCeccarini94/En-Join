@@ -83,6 +83,15 @@
   z-index: 1000;
 }
 
+.dropdown-user-name {
+  color: #f8f9fa;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(248, 249, 250, 0.2);
+  margin-bottom: 4px;
+}
+
 .dropdown-menu-custom a,
 .dropdown-menu-custom button {
   background: transparent;

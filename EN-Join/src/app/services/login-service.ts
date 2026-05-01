@@ -2,6 +2,13 @@ import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+type User = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  image: string;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -11,8 +18,8 @@ export class LoginService {
   private _isLoggedIn = signal<boolean>(this.hasToken());
   readonly isLoggedIn = this._isLoggedIn.asReadonly();
 
-  login(user: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, user);
+  login(user: User): Observable<User> {
+    return this.http.post<User>(this.apiUrl, user);
   }
 
   setSession(token: string): void {
