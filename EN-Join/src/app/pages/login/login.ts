@@ -34,10 +34,25 @@ export class Login {
     if (this.loginForm.invalid) return;
     this.loginService.login(this.loginForm.value).subscribe({
       next: (response) => {
-        this.loginService.setSession(response.token);
+        const token = this.extractToken(response);
+        if (!token) {
+          console.error('Token non trovato nella risposta login:', response);
+          return;
+        }
+        this.loginService.setSession(token);
         this.router.navigate(['/']);
       },
       error: (err) => console.error('Errore login:', err),
     });
+  }
+  private extractToken(response: any): string | null {
+    return (
+      response?.token ??
+      response?.accessToken ??
+      response?.jwt ??
+      response?.data?.token ??
+      response?.data?.accessToken ??
+      null
+    );
   }
 }

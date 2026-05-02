@@ -17,14 +17,15 @@
         <button class="avatar-btn" type="button" (click)="toggleDropdown()">
           <img
             class="avatar-img"
-            src="https://api.dicebear.com/9.x/adventurer/svg?seed=EnJoinUser"
-            alt="User avatar"
+            [src]="user()?.image || 'https://placehold.co/84x84?text=U'"
+            [alt]="(user()?.firstName || 'User') + ' avatar'"
           />
         </button>
         @if (isDropdownOpen) {
           <div class="dropdown-menu-custom">
+            <span class="dropdown-user-name"> {{ user()?.firstName }} {{ user()?.lastName }} </span>
             <a routerLink="/" (click)="toggleDropdown()">Home</a>
-            <a routerLink="/categorie" (click)="toggleDropdown()">Categorie</a>
+            <a routerLink="/profile" (click)="toggleDropdown()">Profilo</a>
             <button type="button" (click)="logout()">Logout</button>
           </div>
         }
