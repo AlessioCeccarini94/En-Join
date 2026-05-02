@@ -45,7 +45,6 @@ export class Login {
       error: (err) => console.error('Errore login:', err),
     });
   }
-
   private extractToken(response: any): string | null {
     return (
       response?.token ??

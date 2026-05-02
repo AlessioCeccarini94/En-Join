@@ -6,7 +6,7 @@ import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-profile',
-  imports: [MatCardModule, RouterLink, MatListModule],
+  imports: [MatCardModule, MatListModule],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 })
@@ -15,7 +15,6 @@ export class Profile {
   ElementRef = inject(ElementRef);
 
   user = signal<User | null>(null);
-
   ngOnInit(): void {
     this.profileService.getUser().subscribe({
       next: (user) => {
