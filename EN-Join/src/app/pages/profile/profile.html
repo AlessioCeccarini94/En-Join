@@ -38,27 +38,31 @@
     </div>
   </div>
 </div>
-<h2 class="text-center mt-3">I miei eventi</h2>
+<h2 class="text-center mt-3">Eventi a cui partecipo</h2>
 
 <div class="container mt-4">
-  <div class="row row-cols-3">
-    <div class="col">
-      <div class="hero-card">
-        <div>
-          <img
-            src="https://www.placecats.com/50/50"
-            class="card-img-top"
-            alt="https://www.placecats.com/50/50"
-          />
-        </div>
-        <div class="hero-card-body">
-          <div class="hero-card-text">
-            <h5 class="hero-card-title">Card title</h5>
-            <p>TEXT CARD</p>
+  @if (joinedEventsError) {
+    <p class="text-danger">{{ joinedEventsError }}</p>
+  }
+  @if (joinedEventsMessage) {
+    <p class="profile-info text-center">{{ joinedEventsMessage }}</p>
+  }
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+    @for (event of joinedEvents(); track event.id) {
+      <div class="col">
+        <div class="hero-card">
+          <div class="hero-card-body">
+            <div class="hero-card-text">
+              <h5 class="hero-card-title">{{ event.category }}</h5>
+              <p>{{ event.description }}</p>
+              <p><strong>Luogo:</strong> {{ event.location }}</p>
+              <p><strong>Data:</strong> {{ event.date }}</p>
+              <p><strong>Max Persone:</strong> {{ event.numberOfPeople }}</p>
+            </div>
           </div>
-          <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>
-    </div>
+    }
   </div>
 </div>

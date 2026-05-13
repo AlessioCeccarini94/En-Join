@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, effect, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { LoginService } from '../../services/login-service';
-import { ProfileService, User } from '../../services/profile-service';
+import { LoginService } from '../../services/AUTH/login-service';
+import { ProfileService, User } from '../../services/USER/profile-service';
 
 @Component({
   selector: 'app-navbar',

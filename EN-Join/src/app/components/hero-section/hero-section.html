@@ -13,7 +13,7 @@
       </button>
     </div>
     <div class="col hero-section-col">
-      <button matFab extended>
+      <button routerLink="/eventi" matFab extended>
         <mat-icon>date_range</mat-icon>
         Prossimi Eventi
       </button>
@@ -22,107 +22,121 @@
 </div>
 
 <div class="container mt-4">
-  <h3 class="hero-title">Prossimi Eventi :</h3>
-  <div class="row row-cols-3">
-    <div class="col">
-      <div class="hero-card">
-        <div>
-          <img
-            src="https://www.placecats.com/50/50"
-            class="card-img-top"
-            alt="https://www.placecats.com/50/50"
-          />
-        </div>
-        <div class="hero-card-body">
-          <div class="hero-card-text">
-            <h5 class="hero-card-title">Card title</h5>
-            <p>TEXT CARD</p>
+  <h3 class="hero-title">Ultimi eventi per categoria</h3>
+  @if (latestEventsError) {
+    <p class="text-danger">{{ latestEventsError }}</p>
+  }
+  @if (latestEventsMessage) {
+    <p class="hero-empty-message">{{ latestEventsMessage }}</p>
+  }
+
+  @for (section of latestEventsByCategory; track section.category) {
+    <section class="latest-events-section">
+      <h4 class="hero-category-title">{{ section.category }}</h4>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
+        @for (event of section.events; track event.id) {
+          <div class="col">
+            <div class="hero-card">
+              <div class="hero-card-body">
+                <div class="hero-card-text">
+                  <h5 class="hero-card-title">{{ event.category }}</h5>
+                  <h4>{{ event.description }}</h4>
+                  <p><strong>Luogo:</strong> {{ event.location }}</p>
+                  <p><strong>Data:</strong> {{ event.date }}</p>
+                  <p><strong>Max Persone:</strong> {{ event.numberOfPeople }}</p>
+                </div>
+                <button type="button" class="btn btn-primary" (click)="joinEvent(event)">
+                  Partecipa
+                </button>
+              </div>
+            </div>
           </div>
-          <a href="#" class="btn btn-primary">Go</a>
+        }
+      </div>
+    </section>
+  }
+</div>
+
+<!-- MODAL -->
+
+<!-- Modal -->
+@if (isModalOpen) {
+  <div class="modal d-block">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Aggiungi Evento</h5>
+          <button type="button" class="btn-close" (click)="closeModal()"></button>
+        </div>
+
+        <form class="modal-body" [formGroup]="eventForm">
+          <div class="mb-3">
+            <label class="form-label">Categoria</label>
+            <select class="form-select" formControlName="category">
+              <option value="">Seleziona categoria...</option>
+              @for (item of category; track item.id) {
+                <option [value]="item.name">{{ item.name }}</option>
+              }
+            </select>
+            @if (eventForm.get('category')?.invalid && eventForm.get('category')?.touched) {
+              <small class="text-danger">La categoria e obbligatoria.</small>
+            }
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Numero massimo di persone</label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="numberOfPeople"
+              placeholder="Es. 10"
+            />
+            @if (
+              eventForm.get('numberOfPeople')?.invalid && eventForm.get('numberOfPeople')?.touched
+            ) {
+              <small class="text-danger">Inserisci almeno 1 persona.</small>
+            }
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Luogo</label>
+            <select class="form-select" formControlName="location">
+              <option value="">Seleziona luogo...</option>
+              @for (city of cities; track city.id) {
+                <option [value]="city.cityName">{{ city.cityName }}</option>
+              }
+            </select>
+            @if (eventForm.get('location')?.invalid && eventForm.get('location')?.touched) {
+              <small class="text-danger">Il luogo e obbligatorio.</small>
+            }
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Descrizione</label>
+            <textarea
+              class="form-control"
+              formControlName="description"
+              rows="3"
+              placeholder="Descrivi l'evento..."
+            ></textarea>
+            @if (eventForm.get('description')?.invalid && eventForm.get('description')?.touched) {
+              <small class="text-danger">La descrizione deve avere almeno 5 caratteri.</small>
+            }
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Data</label>
+            <input type="date" class="form-control" formControlName="date" />
+            @if (eventForm.get('date')?.invalid && eventForm.get('date')?.touched) {
+              <small class="text-danger">La data e obbligatoria.</small>
+            }
+          </div>
+        </form>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" (click)="closeModal()">Annulla</button>
+          <button class="btn btn-primary" [disabled]="eventForm.invalid" (click)="salvaEvento()">
+            Salva Evento
+          </button>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- MODAL -->
-
-  <!-- Modal -->
-  @if (isModalOpen) {
-    <div class="modal d-block">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Aggiungi Evento</h5>
-            <button type="button" class="btn-close" (click)="closeModal()"></button>
-          </div>
-
-          <form class="modal-body" [formGroup]="eventForm">
-            <div class="mb-3">
-              <label class="form-label">Categoria</label>
-              <select class="form-select" formControlName="category">
-                <option value="">Seleziona categoria...</option>
-                @for (item of category; track item.id) {
-                  <option [value]="item.name">{{ item.name }}</option>
-                }
-              </select>
-              @if (eventForm.get('category')?.invalid && eventForm.get('category')?.touched) {
-                <small class="text-danger">La categoria e obbligatoria.</small>
-              }
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Numero massimo di persone</label>
-              <input
-                type="number"
-                class="form-control"
-                formControlName="numberOfPeople"
-                placeholder="Es. 10"
-              />
-              @if (eventForm.get('numberOfPeople')?.invalid && eventForm.get('numberOfPeople')?.touched) {
-                <small class="text-danger">Inserisci almeno 1 persona.</small>
-              }
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Luogo</label>
-              <select class="form-select" formControlName="location">
-                <option value="">Seleziona luogo...</option>
-                @for (city of cities; track city.id) {
-                  <option [value]="city.cityName">{{ city.cityName }}</option>
-                }
-              </select>
-              @if (eventForm.get('location')?.invalid && eventForm.get('location')?.touched) {
-                <small class="text-danger">Il luogo e obbligatorio.</small>
-              }
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Descrizione</label>
-              <textarea
-                class="form-control"
-                formControlName="description"
-                rows="3"
-                placeholder="Descrivi l'evento..."
-              ></textarea>
-              @if (eventForm.get('description')?.invalid && eventForm.get('description')?.touched) {
-                <small class="text-danger">La descrizione deve avere almeno 5 caratteri.</small>
-              }
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Data</label>
-              <input type="date" class="form-control" formControlName="date" />
-              @if (eventForm.get('date')?.invalid && eventForm.get('date')?.touched) {
-                <small class="text-danger">La data e obbligatoria.</small>
-              }
-            </div>
-          </form>
-
-          <div class="modal-footer">
-            <button class="btn btn-secondary" (click)="closeModal()">Annulla</button>
-            <button class="btn btn-primary" [disabled]="eventForm.invalid" (click)="salvaEvento()">
-              Salva Evento
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-backdrop fade show" (click)="closeModal()"></div>
-  }
-</div>
+  <div class="modal-backdrop fade show" (click)="closeModal()"></div>
+}

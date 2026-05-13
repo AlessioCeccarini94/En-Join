@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { LoginService } from '../../services/login-service';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { LoginService } from '../../services/AUTH/login-service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,6 +23,7 @@ import { MatCardModule } from '@angular/material/card';
 export class Login {
   private loginService = inject(LoginService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private fb = inject(FormBuilder);
 
   loginForm: FormGroup = this.fb.group({
@@ -40,7 +41,8 @@ export class Login {
           return;
         }
         this.loginService.setSession(token);
-        this.router.navigate(['/']);
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+        this.router.navigateByUrl(returnUrl);
       },
       error: (err) => console.error('Errore login:', err),
     });

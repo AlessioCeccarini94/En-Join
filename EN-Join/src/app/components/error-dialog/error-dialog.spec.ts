@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EventiPrivati } from './eventi-privati';
+import { ErrorDialog } from './error-dialog';
 
-describe('EventiPrivati', () => {
-  let component: EventiPrivati;
-  let fixture: ComponentFixture<EventiPrivati>;
+describe('ErrorDialog', () => {
+  let component: ErrorDialog;
+  let fixture: ComponentFixture<ErrorDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EventiPrivati],
+      imports: [ErrorDialog],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EventiPrivati);
+    fixture = TestBed.createComponent(ErrorDialog);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
