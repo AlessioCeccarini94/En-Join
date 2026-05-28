@@ -76,7 +76,7 @@
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Citta</mat-label>
           <mat-select formControlName="cityId" placeholder="Seleziona citta...">
-            @for (city of cities; track city.id) {
+            @for (city of cities(); track city.id) {
               <mat-option [value]="city.id">{{ city.name }}</mat-option>
             }
           </mat-select>
@@ -87,11 +87,11 @@
           }
         </mat-form-field>
 
-        @if (errorMessage) {
-          <p class="error-message">{{ errorMessage }}</p>
+        @if (errorMessage()) {
+          <p class="error-message">{{ errorMessage() }}</p>
         }
-        @if (successMessage) {
-          <p class="success-message">{{ successMessage }}</p>
+        @if (successMessage()) {
+          <p class="success-message">{{ successMessage() }}</p>
         }
 
         <a mat-button routerLink="/login">Hai gia un account? Accedi</a>
@@ -100,9 +100,9 @@
           color="primary"
           type="submit"
           class="w-100"
-          [disabled]="isSubmitting"
+          [disabled]="isSubmitting()"
         >
-          {{ isSubmitting ? 'Registrazione...' : 'Registrati' }}
+          {{ isSubmitting() ? 'Registrazione...' : 'Registrati' }}
         </button>
       </form>
     </mat-card-content>

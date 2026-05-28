@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { EventService, EventItem } from '../../services/PAGES/eventService';
 
 @Component({
@@ -9,27 +9,28 @@ import { EventService, EventItem } from '../../services/PAGES/eventService';
 })
 export class Eventi implements OnInit {
   private eventService = inject(EventService);
-  upcomingEvents: EventItem[] = [];
-  eventsError = '';
-  eventsMessage = '';
+  upcomingEvents = signal<EventItem[]>([]);
+  eventsError = signal('');
+  eventsMessage = signal('');
 
   ngOnInit() {
     this.loadUpcomingEvents();
   }
 
   loadUpcomingEvents() {
-    this.eventsError = '';
-    this.eventsMessage = '';
+    this.eventsError.set('');
+    this.eventsMessage.set('');
 
     this.eventService.getEvents().subscribe({
       next: (events) => {
-        this.upcomingEvents = this.sortUpcomingEvents(events);
-        if (this.upcomingEvents.length === 0) {
-          this.eventsMessage = 'Non ci sono prossimi eventi disponibili.';
+        const upcomingEvents = this.sortUpcomingEvents(events);
+        this.upcomingEvents.set(upcomingEvents);
+        if (upcomingEvents.length === 0) {
+          this.eventsMessage.set('Non ci sono prossimi eventi disponibili.');
         }
       },
       error: (err) => {
-        this.eventsError = 'Impossibile caricare i prossimi eventi.';
+        this.eventsError.set('Impossibile caricare i prossimi eventi.');
         console.error('Errore caricamento eventi:', err);
       },
     });
@@ -55,15 +56,15 @@ export class Eventi implements OnInit {
     return today.getTime();
   }
   joinEvent(event: EventItem) {
-    this.eventsError = '';
-    this.eventsMessage = '';
+    this.eventsError.set('');
+    this.eventsMessage.set('');
 
     this.eventService.joinEvent(event.id).subscribe({
       next: () => {
-        this.eventsMessage = `Hai scelto di partecipare a ${event.category}.`;
+        this.eventsMessage.set(`Hai scelto di partecipare a ${event.category}.`);
       },
       error: (err) => {
-        this.eventsError = 'Impossibile partecipare a questo evento.';
+        this.eventsError.set('Impossibile partecipare a questo evento.');
         console.error('Errore partecipazione evento:', err);
       },
     });

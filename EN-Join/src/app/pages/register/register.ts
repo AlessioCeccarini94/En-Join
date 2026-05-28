@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { RegisterService } from '../../services/AUTH/register-service';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,10 +28,10 @@ export class Register {
   private fb = inject(FormBuilder);
   private registerService = inject(RegisterService);
   private cityService = inject(CityService);
-  cities: Array<{ id: string; name: string }> = [];
-  isSubmitting = false;
-  errorMessage = '';
-  successMessage = '';
+  cities = signal<Array<{ id: string; name: string }>>([]);
+  isSubmitting = signal(false);
+  errorMessage = signal('');
+  successMessage = signal('');
 
   registerForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -45,26 +45,27 @@ export class Register {
   ngOnInit(): void {
     this.cityService.getCities().subscribe({
       next: (cities) => {
-        this.cities = cities
+        const sortedCities = cities
           .map((city) => ({ id: city.id, name: city.cityName }))
           .sort((a, b) => a.name.localeCompare(b.name, 'it', { sensitivity: 'base' }));
+        this.cities.set(sortedCities);
       },
       error: (err) => {
-        this.errorMessage = 'Impossibile caricare la lista delle citta.';
+        this.errorMessage.set('Impossibile caricare la lista delle citta.');
         console.error('Errore cities:', err);
       },
     });
   }
 
   register(): void {
-    if (this.registerForm.invalid || this.isSubmitting) {
+    if (this.registerForm.invalid || this.isSubmitting()) {
       this.registerForm.markAllAsTouched();
       return;
     }
 
-    this.isSubmitting = true;
-    this.errorMessage = '';
-    this.successMessage = '';
+    this.isSubmitting.set(true);
+    this.errorMessage.set('');
+    this.successMessage.set('');
 
     const formValue = this.registerForm.getRawValue();
     const request: RegisterRequest = {
@@ -78,12 +79,12 @@ export class Register {
 
     this.registerService.register(request).subscribe({
       next: () => {
-        this.successMessage = 'Registrazione completata, reindirizzamento al login...';
-        this.isSubmitting = false;
+        this.successMessage.set('Registrazione completata, reindirizzamento al login...');
+        this.isSubmitting.set(false);
       },
       error: (err) => {
-        this.errorMessage = err?.error?.message || 'Errore durante la registrazione.';
-        this.isSubmitting = false;
+        this.errorMessage.set(err?.error?.message || 'Errore durante la registrazione.');
+        this.isSubmitting.set(false);
       },
     });
   }

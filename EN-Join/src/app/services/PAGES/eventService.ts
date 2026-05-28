@@ -9,6 +9,7 @@ export type EventItem = {
   numberOfPeople: number;
   location: string;
   description: string;
+  organizerName: string;
   date: string;
 };
 
@@ -37,6 +38,13 @@ export class EventService {
       .get<{ content: EventItem[] }>(`${this.baseURL}/events/all_events`)
       .pipe(map((response) => response.content));
   }
+
+  getEventsByCategory(category: string): Observable<EventItem[]> {
+    return this.http.get<EventItem[]>(`${this.baseURL}/events/by-category`, {
+      params: { category },
+    });
+  }
+
   getLatestEventsByCategory(): Observable<LatestEventsByCategory[]> {
     return this.http.get<LatestEventsByCategory[]>(`${this.baseURL}/events/latest-by-category`);
   }

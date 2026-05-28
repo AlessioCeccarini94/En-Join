@@ -7,7 +7,7 @@
       </button>
     </div>
     <div class="col hero-section-col">
-      <button matFab extended>
+      <button routerLink="/categorie" matFab extended>
         <mat-icon>folder_copy</mat-icon>
         Categorie
       </button>
@@ -23,17 +23,17 @@
 
 <div class="container mt-4">
   <h3 class="hero-title">Ultimi eventi per categoria</h3>
-  @if (latestEventsError) {
-    <p class="text-danger">{{ latestEventsError }}</p>
+  @if (latestEventsError()) {
+    <p class="text-danger">{{ latestEventsError() }}</p>
   }
-  @if (latestEventsMessage) {
-    <p class="hero-empty-message">{{ latestEventsMessage }}</p>
+  @if (latestEventsMessage()) {
+    <p class="hero-empty-message">{{ latestEventsMessage() }}</p>
   }
 
-  @for (section of latestEventsByCategory; track section.category) {
+  @for (section of latestEventsByCategory(); track section.category) {
     <section class="latest-events-section">
       <h4 class="hero-category-title">{{ section.category }}</h4>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
         @for (event of section.events; track event.id) {
           <div class="col">
             <div class="hero-card">
@@ -44,6 +44,7 @@
                   <p><strong>Luogo:</strong> {{ event.location }}</p>
                   <p><strong>Data:</strong> {{ event.date }}</p>
                   <p><strong>Max Persone:</strong> {{ event.numberOfPeople }}</p>
+                  <p><strong> Organizzatore:</strong> {{ event.organizerName }}</p>
                 </div>
                 <button type="button" class="btn btn-primary" (click)="joinEvent(event)">
                   Partecipa
@@ -74,7 +75,7 @@
             <label class="form-label">Categoria</label>
             <select class="form-select" formControlName="category">
               <option value="">Seleziona categoria...</option>
-              @for (item of category; track item.id) {
+              @for (item of category(); track item.id) {
                 <option [value]="item.name">{{ item.name }}</option>
               }
             </select>
@@ -100,7 +101,7 @@
             <label class="form-label">Luogo</label>
             <select class="form-select" formControlName="location">
               <option value="">Seleziona luogo...</option>
-              @for (city of cities; track city.id) {
+              @for (city of cities(); track city.id) {
                 <option [value]="city.cityName">{{ city.cityName }}</option>
               }
             </select>

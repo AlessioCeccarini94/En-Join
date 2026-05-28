@@ -1,1 +1,46 @@
-<p>categorie works!</p>
+<div class="container hero-section-container h-100">
+  <div class="row hero-section-row g-3 w-100 mt-3 row-cols-3 justify-content-center">
+    @for (category of categories; track category) {
+      <div class="col hero-section-col">
+        <button
+          class="w-100 mt-3"
+          matFab
+          extended
+          type="button"
+          (click)="loadEventsByCategory(category)"
+        >
+          <mat-icon>folder_copy</mat-icon>
+          {{ category }}
+        </button>
+      </div>
+    }
+  </div>
+
+  @if (selectedCategory()) {
+    <h3 class="mt-5">Eventi: {{ selectedCategory() }}</h3>
+  }
+
+  @if (errorMessage()) {
+    <p class="text-danger mt-3">{{ errorMessage() }}</p>
+  }
+
+  @if (emptyMessage()) {
+    <p class="mt-3">{{ emptyMessage() }}</p>
+  }
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mt-3">
+    @for (event of events(); track event.id) {
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ event.category }}</h5>
+            <p class="card-text">{{ event.description }}</p>
+            <p class="card-text"><strong>Luogo:</strong> {{ event.location }}</p>
+            <p class="card-text"><strong>Data:</strong> {{ event.date }}</p>
+            <p class="card-text"><strong>Max persone:</strong> {{ event.numberOfPeople }}</p>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
