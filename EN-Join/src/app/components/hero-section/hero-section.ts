@@ -9,13 +9,11 @@ import {
 import { AllEvents } from '../../models/interfaces/event-response';
 import { CategoryItem, CategoryService } from '../../services/PAGES/categoryService';
 import { CityItem, CityService } from '../../services/PAGES/cityService';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-hero-section',
-  imports: [ReactiveFormsModule, MatButtonModule, MatIconModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './hero-section.html',
   styleUrl: './hero-section.css',
 })

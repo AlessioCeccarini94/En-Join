@@ -1,11 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { EventItem, EventService } from '../../services/PAGES/eventService';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-categorie',
-  imports: [MatButtonModule, MatIconModule],
+  imports: [MatIconModule],
   templateUrl: './categorie.html',
   styleUrl: './categorie.css',
 })
@@ -13,6 +12,14 @@ export class Categorie {
   private eventService = inject(EventService);
 
   categories = ['Spettacolo', 'Sport', 'Musica', 'Viaggi', 'Arte'];
+
+  categoriesIcon: { [key: string]: string } = {
+    Spettacolo: 'theater_comedy',
+    Sport: 'sports_soccer',
+    Viaggi: 'flight',
+    Musica: 'music_note',
+    Arte: 'palette',
+  };
   selectedCategory = signal('');
   events = signal<EventItem[]>([]);
   errorMessage = signal('');

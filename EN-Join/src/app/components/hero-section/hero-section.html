@@ -1,20 +1,20 @@
 <div class="container hero-section-container">
   <div class="row hero-section-row g-3 w-100 justify-content-center">
     <div class="col hero-section-col">
-      <button (click)="openModal()" matFab extended>
-        <mat-icon>add_circle</mat-icon>
+      <button type="button" class="btn btn-primary w-100" (click)="openModal()">
+        <i class="bi bi-plus-circle me-2"></i>
         Aggiungi Evento
       </button>
     </div>
     <div class="col hero-section-col">
-      <button routerLink="/categorie" matFab extended>
-        <mat-icon>folder_copy</mat-icon>
+      <button type="button" class="btn btn-primary w-100" routerLink="/categorie">
+        <i class="bi bi-folder2-open me-2"></i>
         Categorie
       </button>
     </div>
     <div class="col hero-section-col">
-      <button routerLink="/eventi" matFab extended>
-        <mat-icon>date_range</mat-icon>
+      <button type="button" class="btn btn-primary w-100" routerLink="/eventi">
+        <i class="bi bi-calendar3 me-2"></i>
         Prossimi Eventi
       </button>
     </div>

@@ -3,13 +3,11 @@
     @for (category of categories; track category) {
       <div class="col hero-section-col">
         <button
-          class="w-100 mt-3"
-          matFab
-          extended
+          class="btn w-100 mt-3 d-flex align-items-center justify-content-center"
           type="button"
           (click)="loadEventsByCategory(category)"
         >
-          <mat-icon>folder_copy</mat-icon>
+          <mat-icon class="me-4">{{ categoriesIcon[category] }}</mat-icon>
           {{ category }}
         </button>
       </div>
@@ -38,6 +36,7 @@
             <p class="card-text"><strong>Luogo:</strong> {{ event.location }}</p>
             <p class="card-text"><strong>Data:</strong> {{ event.date }}</p>
             <p class="card-text"><strong>Max persone:</strong> {{ event.numberOfPeople }}</p>
+            <p class="card-text"><strong>Orgaizzatore:</strong> {{ event.organizerName }}</p>
           </div>
         </div>
       </div>

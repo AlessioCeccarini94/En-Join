@@ -1,12 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { ProfileService, User } from '../../services/USER/profile-service';
 import { EventItem } from '../../services/PAGES/eventService';
-import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-profile',
-  imports: [MatCardModule, MatListModule],
+  imports: [],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 })

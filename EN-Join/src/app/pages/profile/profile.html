@@ -3,38 +3,28 @@
 <div class="container mt-4">
   <div class="row w-100 h-100">
     <div class="profile-info-container">
-      <mat-list class="profile-info-list">
+      <div class="profile-info-list">
         <div class="user-info d-flex">
-          <mat-list-item><p class="profile-info-title">Immagine del profilo</p></mat-list-item>
-          <mat-list-item><img src="{{ user()?.image }}" alt="" /></mat-list-item>
+          <p class="profile-info-title">Immagine del profilo</p>
+          <img src="{{ user()?.image }}" alt="" />
         </div>
         <div class="user-info d-flex">
-          <mat-list-item><p class="profile-info-title">Nome e Cognome</p></mat-list-item>
-          <mat-list-item
-            ><p class="profile-info">
-              {{ user()?.firstName }} {{ user()?.lastName }}
-            </p></mat-list-item
-          >
+          <p class="profile-info-title">Nome e Cognome</p>
+          <p class="profile-info">{{ user()?.firstName }} {{ user()?.lastName }}</p>
         </div>
         <div class="user-info d-flex">
-          <mat-list-item><p class="profile-info-title">Cellulare</p></mat-list-item>
-          <mat-list-item
-            ><p class="profile-info">{{ user()?.phone }}</p></mat-list-item
-          >
+          <p class="profile-info-title">Cellulare</p>
+          <p class="profile-info">{{ user()?.phone }}</p>
         </div>
         <div class="user-info d-flex">
-          <mat-list-item><p class="profile-info-title">Email</p></mat-list-item>
-          <mat-list-item
-            ><p class="profile-info">{{ user()?.email }}</p></mat-list-item
-          >
+          <p class="profile-info-title">Email</p>
+          <p class="profile-info">{{ user()?.email }}</p>
         </div>
         <div class="user-info d-flex">
-          <mat-list-item><p class="profile-info-title">Città</p></mat-list-item>
-          <mat-list-item
-            ><p class="profile-info">{{ user()?.location }}</p></mat-list-item
-          >
+          <p class="profile-info-title">Citta</p>
+          <p class="profile-info">{{ user()?.location }}</p>
         </div>
-      </mat-list>
+      </div>
     </div>
   </div>
 </div>

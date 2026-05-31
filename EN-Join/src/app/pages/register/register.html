@@ -1,110 +1,101 @@
 <div class="register-container">
-  <mat-card class="register-card">
-    <mat-card-header>
-      <mat-card-title>Registrati</mat-card-title>
-    </mat-card-header>
+  <div class="register-card">
+    <h2>Registrati</h2>
 
-    <mat-card-content>
-      <form [formGroup]="registerForm" (ngSubmit)="register()">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Nome</mat-label>
-          <input matInput type="text" formControlName="firstName" placeholder="Il tuo nome" />
-          @if (
-            registerForm.get('firstName')?.hasError('required') &&
-            registerForm.get('firstName')?.touched
-          ) {
-            <mat-error>Nome obbligatorio</mat-error>
-          }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Cognome</mat-label>
-          <input matInput type="text" formControlName="lastName" placeholder="Il tuo cognome" />
-          @if (
-            registerForm.get('lastName')?.hasError('required') &&
-            registerForm.get('lastName')?.touched
-          ) {
-            <mat-error>Cognome obbligatorio</mat-error>
-          }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="email" placeholder="La tua email" />
-          @if (
-            registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched
-          ) {
-            <mat-error>Email obbligatoria</mat-error>
-          }
-          @if (registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched) {
-            <mat-error>Email non valida</mat-error>
-          }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Password</mat-label>
-          <input
-            matInput
-            type="password"
-            formControlName="password"
-            placeholder="La tua password"
-          />
-          @if (
-            registerForm.get('password')?.hasError('required') &&
-            registerForm.get('password')?.touched
-          ) {
-            <mat-error>Password obbligatoria</mat-error>
-          }
-          @if (
-            registerForm.get('password')?.hasError('minlength') &&
-            registerForm.get('password')?.touched
-          ) {
-            <mat-error>Minimo 6 caratteri</mat-error>
-          }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Telefono</mat-label>
-          <input matInput type="text" formControlName="phone" placeholder="Il tuo telefono" />
-          @if (
-            registerForm.get('phone')?.hasError('required') && registerForm.get('phone')?.touched
-          ) {
-            <mat-error>Telefono obbligatorio</mat-error>
-          }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Citta</mat-label>
-          <mat-select formControlName="cityId" placeholder="Seleziona citta...">
-            @for (city of cities(); track city.id) {
-              <mat-option [value]="city.id">{{ city.name }}</mat-option>
-            }
-          </mat-select>
-          @if (
-            registerForm.get('cityId')?.hasError('required') && registerForm.get('cityId')?.touched
-          ) {
-            <mat-error>Citta obbligatoria</mat-error>
-          }
-        </mat-form-field>
-
-        @if (errorMessage()) {
-          <p class="error-message">{{ errorMessage() }}</p>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <div class="mb-3">
+        <label class="form-label">Nome</label>
+        <input class="form-control" type="text" formControlName="firstName" placeholder="Il tuo nome" />
+        @if (
+          registerForm.get('firstName')?.hasError('required') &&
+          registerForm.get('firstName')?.touched
+        ) {
+          <small class="text-danger">Nome obbligatorio</small>
         }
-        @if (successMessage()) {
-          <p class="success-message">{{ successMessage() }}</p>
-        }
+      </div>
 
-        <a mat-button routerLink="/login">Hai gia un account? Accedi</a>
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          class="w-100"
-          [disabled]="isSubmitting()"
-        >
-          {{ isSubmitting() ? 'Registrazione...' : 'Registrati' }}
-        </button>
-      </form>
-    </mat-card-content>
-  </mat-card>
+      <div class="mb-3">
+        <label class="form-label">Cognome</label>
+        <input class="form-control" type="text" formControlName="lastName" placeholder="Il tuo cognome" />
+        @if (
+          registerForm.get('lastName')?.hasError('required') &&
+          registerForm.get('lastName')?.touched
+        ) {
+          <small class="text-danger">Cognome obbligatorio</small>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input class="form-control" type="email" formControlName="email" placeholder="La tua email" />
+        @if (
+          registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched
+        ) {
+          <small class="text-danger">Email obbligatoria</small>
+        }
+        @if (registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched) {
+          <small class="text-danger">Email non valida</small>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input
+          class="form-control"
+          type="password"
+          formControlName="password"
+          placeholder="La tua password"
+        />
+        @if (
+          registerForm.get('password')?.hasError('required') &&
+          registerForm.get('password')?.touched
+        ) {
+          <small class="text-danger">Password obbligatoria</small>
+        }
+        @if (
+          registerForm.get('password')?.hasError('minlength') &&
+          registerForm.get('password')?.touched
+        ) {
+          <small class="text-danger">Minimo 6 caratteri</small>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Telefono</label>
+        <input class="form-control" type="text" formControlName="phone" placeholder="Il tuo telefono" />
+        @if (
+          registerForm.get('phone')?.hasError('required') && registerForm.get('phone')?.touched
+        ) {
+          <small class="text-danger">Telefono obbligatorio</small>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Citta</label>
+        <select class="form-select" formControlName="cityId">
+          <option value="">Seleziona citta...</option>
+          @for (city of cities(); track city.id) {
+            <option [value]="city.id">{{ city.name }}</option>
+          }
+        </select>
+        @if (
+          registerForm.get('cityId')?.hasError('required') && registerForm.get('cityId')?.touched
+        ) {
+          <small class="text-danger">Citta obbligatoria</small>
+        }
+      </div>
+
+      @if (errorMessage()) {
+        <p class="error-message">{{ errorMessage() }}</p>
+      }
+      @if (successMessage()) {
+        <p class="success-message">{{ successMessage() }}</p>
+      }
+
+      <a class="btn btn-link px-0" routerLink="/login">Hai gia un account? Accedi</a>
+      <button class="btn btn-primary w-100" type="submit" [disabled]="isSubmitting()">
+        {{ isSubmitting() ? 'Registrazione...' : 'Registrati' }}
+      </button>
+    </form>
+  </div>
 </div>

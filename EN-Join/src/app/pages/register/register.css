@@ -5,44 +5,28 @@
   min-height: 80vh;
 }
 
-::ng-deep .register-card {
-  background-color: #272727 !important;
-  box-shadow: #ff6b6b 0 0 10px 0 !important;
-  color: #f8f9fa !important;
-  width: 420px;
+.register-card {
+  background-color: #272727;
+  box-shadow: #ff6b6b 0 0 10px 0;
+  color: #f8f9fa;
+  width: min(420px, 100%);
   padding: 2rem;
 }
 
-::ng-deep .register-card mat-card-title {
-  color: #f8f9fa !important;
+.register-card .form-control,
+.register-card .form-select {
+  background-color: #1a1a1a;
+  border-color: #ff6b6b;
+  color: #f8f9fa;
 }
 
-::ng-deep .register-card .mat-mdc-form-field {
-  width: 100%;
-  margin-bottom: 0.5rem;
+.register-card .form-control::placeholder {
+  color: #aaa;
 }
 
-::ng-deep .register-card .mat-mdc-text-field-wrapper {
-  background-color: #1a1a1a !important;
-}
-
-::ng-deep .register-card input {
-  color: #f8f9fa !important;
-}
-
-::ng-deep .register-card .mdc-floating-label {
-  color: #aaa !important;
-}
-
-::ng-deep .register-card .mdc-notched-outline__leading,
-::ng-deep .register-card .mdc-notched-outline__notch,
-::ng-deep .register-card .mdc-notched-outline__trailing {
-  border-color: #ff6b6b !important;
-}
-
-::ng-deep .mat-mdc-raised-button.mat-primary {
-  background-color: #ff6b6b !important;
-  color: #f8f9fa !important;
+.register-card .btn-primary {
+  background-color: #ff6b6b;
+  border-color: #ff6b6b;
 }
 
 .error-message {
