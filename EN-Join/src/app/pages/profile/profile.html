@@ -49,7 +49,12 @@
               <p><strong>Luogo:</strong> {{ event.location }}</p>
               <p><strong>Data:</strong> {{ event.date }}</p>
               <p><strong>Max Persone:</strong> {{ event.numberOfPeople }}</p>
-              <p><strong>Organizzatore:</strong> {{ event.organizerName }}</p>
+              <p>
+                <strong>Organizzatore:</strong>
+                <a class="organizer-link" [routerLink]="['/organize-profile', event.organizerId]">
+                  {{ event.organizerName }}
+                </a>
+              </p>
             </div>
           </div>
         </div>

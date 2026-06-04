@@ -1,9 +1,10 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { EventService, EventItem } from '../../services/PAGES/eventService';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-eventi',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './eventi.html',
   styleUrl: './eventi.css',
 })

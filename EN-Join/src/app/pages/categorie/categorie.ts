@@ -1,10 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { EventItem, EventService } from '../../services/PAGES/eventService';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-categorie',
-  imports: [MatIconModule],
+  imports: [MatIconModule, RouterLink],
   templateUrl: './categorie.html',
   styleUrl: './categorie.css',
 })

@@ -1,10 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ProfileService, User } from '../../services/USER/profile-service';
 import { EventItem } from '../../services/PAGES/eventService';
 
 @Component({
   selector: 'app-profile',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 })

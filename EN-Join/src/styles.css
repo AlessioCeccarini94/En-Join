@@ -1,1 +1,12 @@
 /* You can add global styles to this file. Global library CSS is loaded from angular.json. */
+
+.organizer-link {
+  color: #ff6b6b;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.organizer-link:hover {
+  color: #f8f9fa;
+  text-decoration: underline;
+}

@@ -9,6 +9,7 @@ export type EventItem = {
   numberOfPeople: number;
   location: string;
   description: string;
+  organizerId: string;
   organizerName: string;
   date: string;
 };

@@ -1,0 +1,25 @@
+.profile-info-container {
+  border: #ff6b6b solid 2px;
+  padding: 1em;
+}
+.profile-info-title {
+  color: #ff6b6b !important;
+  font-size: 1.2em !important;
+  font-weight: 600;
+}
+
+.profile-info {
+  color: #f8f9fa;
+  font-weight: 400;
+  font-size: 1.2em;
+  margin-left: 1em;
+}
+
+.user-info {
+  margin-bottom: 1em;
+  margin-left: 43%;
+}
+
+.user-info img {
+  margin-left: 1em;
+}

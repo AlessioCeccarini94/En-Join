@@ -1,15 +1,7 @@
 <nav class="navbar">
   <div class="container-fluid navbar-elements">
+    <h1></h1>
     <a class="navbar-brand" routerLink="/"><img src="EN-Join_logo.PNG" alt="" /></a>
-    <form class="search-form" role="search">
-      <input
-        class="search-bar form-control me-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button class="navbar-btn" type="submit">Search</button>
-    </form>
     @if (!isLoggedIn()) {
       <button class="navbar-btn" routerLink="/login">Login</button>
     } @else {

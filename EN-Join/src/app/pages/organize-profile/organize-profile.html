@@ -1,0 +1,34 @@
+<h2 class="text-center mt-3">Organizzatore</h2>
+
+<div class="container mt-4">
+  @if (errorMessage()) {
+    <p class="text-danger text-center">{{ errorMessage() }}</p>
+  }
+
+  <div class="row w-100 h-100">
+    <div class="profile-info-container">
+      <div class="profile-info-list">
+        <div class="user-info d-flex">
+          <p class="profile-info-title">Immagine del profilo</p>
+          <img src="{{ user()?.image }}" alt="" />
+        </div>
+        <div class="user-info d-flex">
+          <p class="profile-info-title">Nome e Cognome</p>
+          <p class="profile-info">{{ user()?.firstName }} {{ user()?.lastName }}</p>
+        </div>
+        <div class="user-info d-flex">
+          <p class="profile-info-title">Cellulare</p>
+          <p class="profile-info">{{ user()?.phone }}</p>
+        </div>
+        <div class="user-info d-flex">
+          <p class="profile-info-title">Email</p>
+          <p class="profile-info">{{ user()?.email }}</p>
+        </div>
+        <div class="user-info d-flex">
+          <p class="profile-info-title">Citta</p>
+          <p class="profile-info">{{ user()?.location }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

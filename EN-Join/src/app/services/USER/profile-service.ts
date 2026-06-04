@@ -5,13 +5,15 @@ import { environment } from '../../../environments/environment';
 import { EventItem } from '../PAGES/eventService';
 
 export type User = {
-  userId: string;
+  id: string;
+  userId?: string;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   location: string;
   image: string;
+  createdEvents?: EventItem[];
 };
 
 @Injectable({
@@ -23,6 +25,10 @@ export class ProfileService {
 
   getUser(): Observable<User> {
     return this.http.get<User>(`${this.baseURL}/users/me`);
+  }
+
+  getUserById(userId: string): Observable<User> {
+    return this.http.get<User>(`${this.baseURL}/users/${userId}`);
   }
 
   getMyEvents(): Observable<EventItem[]> {

@@ -5,6 +5,7 @@ import { Categorie } from './pages/categorie/categorie';
 import { Register } from './pages/register/register';
 import { Profile } from './pages/profile/profile';
 import { Eventi } from './pages/eventi/eventi';
+import { OrganizeProfile } from './pages/organize-profile/organize-profile';
 import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
@@ -13,5 +14,6 @@ export const routes: Routes = [
   { path: 'categorie', component: Categorie },
   { path: 'register', component: Register },
   { path: 'profile', component: Profile, canActivate: [authGuard] },
+  { path: 'organize-profile/:userId', component: OrganizeProfile, canActivate: [authGuard] },
   { path: 'eventi', component: Eventi },
 ];

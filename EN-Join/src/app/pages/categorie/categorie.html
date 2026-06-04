@@ -36,7 +36,12 @@
             <p class="card-text"><strong>Luogo:</strong> {{ event.location }}</p>
             <p class="card-text"><strong>Data:</strong> {{ event.date }}</p>
             <p class="card-text"><strong>Max persone:</strong> {{ event.numberOfPeople }}</p>
-            <p class="card-text"><strong>Orgaizzatore:</strong> {{ event.organizerName }}</p>
+            <p class="card-text">
+              <strong>Organizzatore:</strong>
+              <a class="organizer-link" [routerLink]="['/organize-profile', event.organizerId]">
+                {{ event.organizerName }}
+              </a>
+            </p>
           </div>
         </div>
       </div>
