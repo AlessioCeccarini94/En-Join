@@ -65,4 +65,12 @@ export class EventService {
   joinEvent(eventId: string): Observable<EventItem> {
     return this.http.put<EventItem>(`${this.baseURL}/events/${eventId}/join`, null);
   }
+
+  leaveEvent(eventId: string): Observable<EventItem> {
+    return this.http.put<EventItem>(`${this.baseURL}/events/${eventId}/leave`, null);
+  }
+
+  deleteEvent(eventId: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseURL}/events/${eventId}`);
+  }
 }

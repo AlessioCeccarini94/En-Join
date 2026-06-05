@@ -109,3 +109,30 @@
   border-color: #ff6b6b;
   color: #f8f9fa;
 }
+
+.event-action-button {
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid #ff6b6b;
+  color: #ff6b6b;
+  display: inline-flex;
+  justify-content: center;
+  margin-top: 0.75em;
+  min-height: 40px;
+  min-width: 40px;
+}
+
+.event-action-button:hover {
+  background-color: #ff6b6b;
+  color: #f8f9fa;
+}
+
+.event-action-button.danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.event-action-button.danger:hover {
+  background-color: #dc3545;
+  color: #f8f9fa;
+}
