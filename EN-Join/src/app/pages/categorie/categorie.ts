@@ -2,7 +2,6 @@ import { Component, inject, signal } from '@angular/core';
 import { EventItem, EventService } from '../../services/PAGES/eventService';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-
 @Component({
   selector: 'app-categorie',
   imports: [MatIconModule, RouterLink],
@@ -11,6 +10,8 @@ import { RouterLink } from '@angular/router';
 })
 export class Categorie {
   private eventService = inject(EventService);
+  eventsError = signal('');
+  eventsMessage = signal('');
 
   categories = ['Spettacolo', 'Sport', 'Musica', 'Viaggi', 'Arte'];
 
@@ -42,6 +43,20 @@ export class Categorie {
       error: (error) => {
         this.errorMessage.set('Impossibile caricare gli eventi per questa categoria.');
         console.error('Errore filtro categoria:', error);
+      },
+    });
+  }
+  joinEvent(event: EventItem) {
+    this.eventsError.set('');
+    this.eventsMessage.set('');
+
+    this.eventService.joinEvent(event.id).subscribe({
+      next: () => {
+        this.eventsMessage.set(`Hai scelto di partecipare a ${event.category}.`);
+      },
+      error: (err) => {
+        this.eventsError.set('Impossibile partecipare a questo evento.');
+        console.error('Errore partecipazione evento:', err);
       },
     });
   }

@@ -56,3 +56,13 @@
   margin-top: 2em;
   color: #ff6b6b;
 }
+
+.card button {
+  background-color: #ff6b6b;
+  color: #f8f9fa;
+}
+.card button:hover {
+  background-color: #f8f9fa;
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
